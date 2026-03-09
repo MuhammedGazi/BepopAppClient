@@ -53,7 +53,26 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "public/libs/slick-carousel/slick/slick.css",
+              "public/libs/slick-carousel/slick/slick-theme.css",
+              "public/assets/css/bootstrap.css",
+              "public/assets/css/theme.css",
+              "public/assets/css/style.css"
+            ],
+            "scripts": [
+              "public/libs/jquery/dist/jquery.min.js",
+              "public/libs/popper.js/dist/umd/popper.min.js",
+              "public/libs/bootstrap/dist/js/bootstrap.min.js",
+              "public/libs/pjax/pjax.min.js",
+              "public/assets/js/ajax.js",
+              "public/assets/js/lazyload.config.js",
+              "public/assets/js/lazyload.js",
+              "public/assets/js/plugin.js",
+              "public/libs/scrollreveal/dist/scrollreveal.min.js",
+              "public/libs/slick-carousel/slick/slick.min.js",
+              "public/libs/feather-icons/dist/feather.min.js",
+              "public/assets/js/theme.js"
             ]
           },
           "configurations": {

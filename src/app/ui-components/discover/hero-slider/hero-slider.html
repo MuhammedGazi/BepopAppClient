@@ -1,0 +1,50 @@
+<div class="page-hero">
+  <div class="media bg-media">
+    <div class="media-content" [style.background-image]="'url(' + backgrounds[currentSlide] + ')'"></div>
+  </div>
+  <div class="slick-container" style="position: relative; overflow: hidden;">
+
+    <div class="pos-rlt" [style.display]="currentSlide === 0 ? 'block' : 'none'">
+      <h2 class="display-3 font-weight-bold text-white">Amazing songs</h2>
+      <div class="col-6 px-0 py-3 text-muted">
+        <p>Nam ut neque, nec venenatis laoreet sit semper arcu diam morbi duis fringilla eget elementum vel ipsum dui at turpis</p>
+      </div>
+      <a href="genres.html" class="btn ajax btn-rounded gd-primary text-white">Explore</a>
+      <a href="#" class="btn no-bg text-white">Share</a>
+    </div>
+
+    <div class="pos-rlt" [style.display]="currentSlide === 1 ? 'block' : 'none'">
+      <h2 class="display-3 font-weight-bold text-white">Bepop top charts</h2>
+      <div class="col-6 px-0 py-3 text-muted">
+        <p>Faucibus nullam est mauris fusce at enim, phasellus volutpat lorem egestas id amet amet, accumsan tellus dictum eu mattis dictumst</p>
+      </div>
+      <a href="charts.html" class="btn ajax btn-rounded gd-primary text-white">Explore</a>
+      <a href="#" class="btn no-bg text-white">Share</a>
+    </div>
+
+    <div class="pos-rlt" [style.display]="currentSlide === 2 ? 'block' : 'none'">
+      <h2 class="display-3 font-weight-bold text-white">Find popular artist</h2>
+      <div class="col-6 px-0 py-3 text-muted">
+        <p>A proin erat velit pharetra, blandit cursus nisl quisque lorem dapibus ultrices elementum erat orci ullamcorper morbi sit condimentum donec</p>
+      </div>
+      <a href="artists.html" class="btn ajax btn-rounded gd-primary text-white">Explore</a>
+      <a href="#" class="btn no-bg text-white">Share</a>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 8px; padding: 16px 0;">
+      <button (click)="currentSlide = 0"
+              [style.background]="currentSlide === 0 ? '#fff' : 'transparent'"
+              style="width:12px; height:12px; border-radius:50%; border:2px solid #fff; cursor:pointer; padding:0;">
+      </button>
+      <button (click)="currentSlide = 1"
+              [style.background]="currentSlide === 1 ? '#fff' : 'transparent'"
+              style="width:12px; height:12px; border-radius:50%; border:2px solid #fff; cursor:pointer; padding:0;">
+      </button>
+      <button (click)="currentSlide = 2"
+              [style.background]="currentSlide === 2 ? '#fff' : 'transparent'"
+              style="width:12px; height:12px; border-radius:50%; border:2px solid #fff; cursor:pointer; padding:0;">
+      </button>
+    </div>
+
+  </div>
+</div>
