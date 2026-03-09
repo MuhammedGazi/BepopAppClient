@@ -10,6 +10,8 @@ import { TrackCarousel } from './ui-components/discover/track-carousel/track-car
 import { AlbumGrid } from './ui-components/discover/album-grid/album-grid';
 import { RecentlyAdded } from './ui-components/discover/recently-added/recently-added';
 import { Events } from './ui-components/discover/events/events';
+import { FormsModule } from '@angular/forms';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,12 @@ import { Events } from './ui-components/discover/events/events';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideHttpClient()
   ],
   bootstrap: [App]
 })
