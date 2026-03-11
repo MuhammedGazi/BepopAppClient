@@ -1,0 +1,42 @@
+/* Dış Taşıyıcı */
+.album-slider-wrapper {
+  width: 100%;
+  overflow: hidden; /* Dışarı taşanları gizle */
+}
+
+/* Slider'ın Kendisi */
+.album-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* Kaydırırken elemanlara yapışmasını sağlar */
+  gap: 1.5rem; /* Elemanlar arası boşluk */
+  padding-bottom: 1rem; /* Alttaki scrollbar için biraz boşluk */
+
+  /* Çirkin scrollbar'ı gizlemek için modern yöntemler */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.album-slider::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Her Bir Albüm Öğesi */
+.slider-item {
+  flex: 0 0 auto; /* Esnemesini engelle, kendi boyutunda kalsın */
+  width: calc(33.333% - 1rem); /* Mobilde ekrana 3 tane sığdır */
+  scroll-snap-align: start; /* Scroll durduğunda başa hizala */
+}
+
+/* Responsive (Ekran büyüdükçe yan yana gösterilecek albüm sayısını artırıyoruz) */
+@media (min-width: 768px) {
+  .slider-item { width: calc(25% - 1.125rem); } /* Tablet: 4 tane */
+}
+
+@media (min-width: 992px) {
+  .slider-item { width: calc(16.666% - 1.25rem); } /* Desktop: 6 tane */
+}
+
+@media (min-width: 1200px) {
+  .slider-item { width: calc(12.5% - 1.3rem); } /* Geniş Ekran: 8 tane */
+}

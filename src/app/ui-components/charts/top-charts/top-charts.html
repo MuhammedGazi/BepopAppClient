@@ -1,0 +1,168 @@
+<div>
+  <div class="page-content page-container" id="page-content">
+    <div class="padding sr" id="list" data-plugin="list" data-page="50">
+      <div class="page-hero">
+        <div class="media bg-media">
+          <div class="media-content"></div>
+        </div>
+        <div class="pos-rlt">
+          <h1 class="display-3 font-weight-bold text-white">Haftalık En İyiler</h1>
+        </div>
+      </div>
+
+      <div class="d-lg-flex pos-rlt">
+        <div class="flex">
+          <div class="heading pt-5 pb-3 d-flex">
+            <div>
+              <div class="text-muted sr-item">En İyi</div>
+              <h5 class="text-highlight sr-item">Listeler</h5>
+            </div>
+            <span class="flex"></span>
+          </div>
+
+          <div class="pos-rlt z-index-1">
+            <div class="d-flex py-2 sr-item">
+              <div class="dropdown my-2">
+                <button class="btn btn-outline-light sorting w-sm w-auto-xs text-align-auto" data-toggle="dropdown">
+                  <span>Yeni</span>
+                </button>
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item sort" data-sort="num" data-order="desc">Popüler</a>
+                  <a href="#" class="dropdown-item sort" data-sort="author" data-order="desc">Yeni</a>
+                </div>
+              </div>
+              <div class="flex"></div>
+              <div class="dropdown my-2 mx-2">
+                <button class="btn btn-outline-light sorting w-sm w-auto-xs text-align-auto" data-toggle="dropdown">
+                  <span>{{ selectedCountry }}</span>
+                </button>
+                <div class="dropdown-menu" id="filter-tag">
+                  <a href="#" (click)="setCountryFilter(null, $event)" class="dropdown-item">Tüm Ülkeler</a>
+
+                  @for (country of uniqueCountries; track country) {
+                  <a href="#" (click)="setCountryFilter(country, $event)" class="dropdown-item">
+                    {{ country }}
+                  </a>
+                  }
+                </div>
+              </div>
+              <div class="dropdown my-2">
+                <button class="btn btn-outline-light sorting w-sm w-auto-xs text-align-auto" data-toggle="dropdown">
+                  <span>{{ selectedCategory }}</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right scrollable hover" id="filter-category"
+                  style="max-height: 310px">
+                  <a href="#" (click)="setCategoryFilter(null, $event)" class="dropdown-item">Tüm Türler</a>
+
+                  @for (category of uniqueCategories; track category) {
+                  <a href="#" (click)="setCategoryFilter(category, $event)" class="dropdown-item">
+                    {{ category }}
+                  </a>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row list list-row list-index">
+            @for (song of songDto; track song.id; let i = $index) {
+            <div class="col-12" [attr.data-id]="song.id" [attr.data-category]="song.category?.name || 'Bilinmeyen'"
+              [attr.data-tag]="song.artist?.country || 'Bilinmeyen Ülke'" [attr.data-source]="song.audioUrl">
+              <div class="list-item r">
+                <div class="media">
+                  <a [href]="'item.detail.html#' + song.id" class="ajax media-content" [style.backgroundImage]="
+                        'url(' +
+                        (song.album?.coverImageUrl
+                          ? song.album.coverImageUrl
+                          : './assets/img/c' + (i % 8) + '.jpg') +
+                        ')'
+                      ">
+                  </a>
+                  <div class="media-action media-action-overlay">
+                    <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
+                      <i data-feather="heart" class="active-fill"></i>
+                    </button>
+                    <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play">
+                      <i data-feather="play"></i>
+                    </button>
+                    <button class="btn btn-icon no-bg no-shadow hide-row btn-more" data-toggle="dropdown">
+                      <i data-feather="more-horizontal"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right"></div>
+                  </div>
+                </div>
+                <div class="list-content text-center">
+                  <div class="list-body">
+                    <a [href]="'item.detail.html#' + song.id" class="list-title title ajax h-1x">
+                      {{ song.title }}
+                    </a>
+                    <a [href]="'artist.detail.html#' + song.artistId"
+                      class="list-subtitle d-block text-muted h-1x subtitle ajax">
+                      {{ song.artist?.name || 'Bilinmeyen Sanatçı' }}
+
+                      @if (song.artist?.country) {
+                      <span class="text-sm">({{ song.artist.country }})</span>
+                      }
+                    </a>
+                  </div>
+                </div>
+                <div class="list-action show-row">
+                  <div class="d-flex align-items-center">
+                    <div class="px-3 text-sm text-muted d-none d-md-block num">{{ i + 1 }}</div>
+                    <button class="btn btn-icon no-bg no-shadow" data-toggle-class>
+                      <i data-feather="heart" class="active-primary"></i>
+                    </button>
+                    <button class="btn btn-icon no-bg no-shadow btn-more" data-toggle="dropdown">
+                      <i data-feather="more-horizontal"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            } @empty {
+            <div class="no-result w-100">
+              <div class="p-5 text-center">
+                <h5>Sonuç Bulunamadı</h5>
+                <small>Şu anda listelenecek bir şarkı yok.</small>
+              </div>
+            </div>
+            }
+          </div>
+
+          <div class="d-flex py-3 justify-content-center hide">
+            <ul class="pagination pagination-sm"></ul>
+          </div>
+        </div>
+
+        <div style="min-width: 4rem"></div>
+
+        <div class="w-xl w-auto-sm no-shrink">
+          <div class="sticky">
+            <div class="list mb-5">
+              <div class="list-item list-overlay r">
+                <div class="media">
+                  <a href="item.detail.html#" class="ajax media-content"
+                    style="background-image: url(./assets/img/b16.jpg)"></a>
+                  <div class="media-action"></div>
+                </div>
+                <div class="list-content p-5 text-center">
+                  <div class="list-body">
+                    <a href="item.detail.html#" class="list-title title ajax h3 font-weight-bold">
+                      Hip-Hop Top 100
+                    </a>
+                    <a href="artist.detail.html#" class="list-subtitle d-block text-muted h-1x subtitle ajax">
+                      Şu anki en popüler rap parçaları.
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <app-top-tracks></app-top-tracks>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

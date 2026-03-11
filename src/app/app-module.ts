@@ -12,6 +12,8 @@ import { RecentlyAdded } from './ui-components/discover/recently-added/recently-
 import { Events } from './ui-components/discover/events/events';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
+import { TopCharts } from './ui-components/charts/top-charts/top-charts';
+import { TopTracks } from './ui-components/charts/top-tracks/top-tracks';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { provideHttpClient } from '@angular/common/http';
     TrackCarousel,
     AlbumGrid,
     RecentlyAdded,
-    Events
+    Events,
+    TopCharts,
+    TopTracks
   ],
   imports: [
     BrowserModule,
