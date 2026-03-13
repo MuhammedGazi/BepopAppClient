@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { TopCharts } from './ui-components/charts/top-charts/top-charts';
 import { TopTracks } from './ui-components/charts/top-tracks/top-tracks';
+import { Genres } from './ui-components/genres/genres';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TopTracks } from './ui-components/charts/top-tracks/top-tracks';
     RecentlyAdded,
     Events,
     TopCharts,
-    TopTracks
+    TopTracks,
+    Genres
   ],
   imports: [
     BrowserModule,

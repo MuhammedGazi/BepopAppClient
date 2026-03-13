@@ -1,0 +1,129 @@
+<div>
+  <div class="page-content page-container" id="page-content">
+    <div class="padding sr" id="list">
+      <div class="pos-rlt">
+        <div class="py-5">
+          <div class="heading pt-5 pb-3 d-flex">
+            <div>
+              <div class="text-muted sr-item"></div>
+              <h5 class="text-highlight sr-item">Filter</h5>
+            </div>
+            <span class="flex"></span>
+          </div>
+
+          <div class="py-2 d-flex sr-item" id="filter-tag">
+            <div class="no-shrink my-2">Countries</div>
+            <div class="mx-3">
+              <button class="btn btn-sm m-1" [ngClass]="selectedCountry === 'All' ? 'btn-primary' : 'btn-white'"
+                (click)="filterByCountry('All')">
+                All countries
+              </button>
+
+              @for (country of countriesDto; track country) {
+              <button class="btn btn-sm m-1" [ngClass]="selectedCountry === country ? 'btn-primary' : 'btn-white'"
+                (click)="filterByCountry(country)">
+                {{ country }}
+              </button>
+              }
+            </div>
+          </div>
+
+          <div class="py-2 d-flex sr-item" id="filter-category">
+            <div class="no-shrink my-2">Genres</div>
+            <div class="mx-3">
+              <button class="btn btn-sm m-1" [ngClass]="selectedCategoryId === null ? 'btn-primary' : 'btn-white'"
+                (click)="filterByCategory(null)">
+                All genres
+              </button>
+
+              @for (category of categoryDto; track category.id) {
+              <button class="btn btn-sm m-1"
+                [ngClass]="selectedCategoryId === category.id ? 'btn-primary' : 'btn-white'"
+                (click)="filterByCategory(category.id)">
+                {{ category.name }}
+              </button>
+              }
+            </div>
+          </div>
+
+          <div class="row row-lg list">
+            @for (song of filteredSongs; track song.id) {
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2"></div>
+            } @empty {
+            <div class="col-12 p-5 text-center text-muted">
+              <h5>Hiçbir Şey Bulunamadı</h5>
+              <small>Görünüşe göre bu kriterlere uygun bir şarkımız yok.</small>
+            </div>
+            }
+          </div>
+        </div>
+
+        <div class="row row-lg list">
+          @for (song of filteredSongs; track song.id) {
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2" [attr.data-id]="song.id" [attr.data-category]="song.categoryId"
+            [attr.data-source]="song.audioUrl">
+            <div class="list-item list-hover r mb-5">
+              <div class="media">
+                <a class="ajax media-content" [style.background-image]="
+                      'url(' + (song.album?.coverImageUrl || '../assets/img/c20.jpg') + ')'
+                    ">
+                </a>
+
+                <div class="media-action media-action-overlay">
+                  <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="active-fill">
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                      </path>
+                    </svg>
+                  </button>
+
+                  <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play"
+                    style="display: flex; align-items: center; justify-content: center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black"
+                      stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </button>
+
+                  <button class="btn btn-icon no-bg no-shadow hide-row btn-more" data-toggle="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="1"></circle>
+                      <circle cx="19" cy="12" r="1"></circle>
+                      <circle cx="5" cy="12" r="1"></circle>
+                    </svg>
+                  </button>
+
+                  <div class="dropdown-menu dropdown-menu-right"></div>
+                </div>
+              </div>
+              <div class="list-content text-center">
+                <div class="list-body">
+                  <a class="list-title title ajax h-1x">
+                    {{ song.title }}
+                  </a>
+                  <a class="list-subtitle d-block text-muted h-1x subtitle ajax">
+                    {{ song.artist?.name || 'Bilinmeyen Sanatçı' }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          } @empty {
+          <div class="col-12 p-5 text-center text-muted">
+            <h5>Hiçbir Şey Bulunamadı</h5>
+            <small>Görünüşe göre bu kriterlere uygun bir şarkımız yok.</small>
+          </div>
+          }
+        </div>
+
+        <div class="d-flex py-3 justify-content-center">
+          <ul class="pagination pagination-sm"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
