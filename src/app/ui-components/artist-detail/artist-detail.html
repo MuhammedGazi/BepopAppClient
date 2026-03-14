@@ -1,0 +1,225 @@
+<div>
+  <div class="page-content page-container" id="page-content">
+    <div class="padding sr">
+
+      <div class="page-hero">
+        <div class="media bg-media">
+          <div class="media-content" [style.background-image]="'url(' + (artist?.profileImageUrl || '../assets/img/b10.jpg') + ')'"></div>
+        </div>
+        <div class="pos-rlt">
+          <h1 class="display-3 font-weight-bold text-white">{{ artist?.name }}</h1>
+
+          <div class="py-4 toolbar align-items-center">
+            <button class="btn btn-icon btn-play btn-rounded gd-primary" style="display: flex; align-items: center; justify-content: center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </button>
+            <span class="text-muted mx-3">{{ songDto.length }} tracks, {{ albumDto.length }} albums</span>
+            <button class="btn btn-sm btn-outline-light btn-rounded mx-3">
+              <span class="d-inline">Follow</span>
+            </button>
+          </div>
+
+          <div class="mb-2">
+            <span class="text-muted">Country: </span>
+            <span class="text-highlight font-weight-bold">{{ artist?.country || 'Bilinmiyor' }}</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="d-md-flex pos-rlt">
+
+        <div class="flex">
+          <div class="d-flex">
+            <ul class="nav nav-sm text-sm nav-pills nav-rounded py-4">
+              <li class="nav-item"><a class="nav-link active" href="#overview" data-toggle="tab">Overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="#tracks" data-toggle="tab">Tracks</a></li>
+              <li class="nav-item"><a class="nav-link" href="#albums" data-toggle="tab">Albums</a></li>
+            </ul>
+          </div>
+
+          <div class="tab-content">
+
+            <div class="tab-pane fade show active" id="overview">
+
+              <div class="heading pt-5 pb-3 d-flex">
+                <div>
+                  <div class="text-muted sr-item">Popular</div>
+                  <h5 class="text-highlight sr-item">Tracks</h5>
+                </div>
+              </div>
+              <div class="row list-row list-index">
+                @for (song of last5SongDto; track song.id) {
+                  <div class="col-12" [attr.data-id]="song.id" [attr.data-source]="song.audioUrl">
+                    <div class="list-item r">
+                      <div class="media">
+                        <a [routerLink]="['/item-detail', song.id]" class="ajax media-content" [style.background-image]="'url(' + (song.album?.coverImageUrl || '../assets/img/c13.jpg') + ')'"></a>
+                        <div class="media-action media-action-overlay">
+                          <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play" style="display: flex; align-items: center; justify-content: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="list-content text-center">
+                        <div class="list-body">
+                          <a [routerLink]="['/item-detail', song.id]" class="list-title title ajax h-1x">{{ song.title }}</a>
+                          <a [routerLink]="['/artist-detail', artist?.id]" class="list-subtitle d-block text-muted h-1x subtitle ajax">{{ artist?.name }}</a>
+                        </div>
+                      </div>
+                      <div class="list-action show-row">
+                        <div class="d-flex align-items-center">
+                          <div class="px-3 text-sm text-muted d-none d-md-block">03:24</div>
+                          <button class="btn btn-icon no-bg no-shadow" data-toggle-class>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="active-primary"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                          </button>
+                          <button class="btn btn-icon no-bg no-shadow btn-more" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-right"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                } @empty {
+                  <div class="col-12 p-3 text-muted">Şarkı bulunamadı.</div>
+                }
+              </div>
+
+              <div class="heading pt-5 pb-3 d-flex">
+                <div>
+                  <div class="text-muted sr-item">More</div>
+                  <h5 class="text-highlight sr-item">Albums</h5>
+                </div>
+                <span class="flex"></span>
+              </div>
+              <div class="row list mb-4">
+                @for (album of last4AlbumDto; track album.id) {
+                  <div class="col-6 col-md-3" [attr.data-id]="album.id">
+                    <div class="list-item list-hover r">
+                      <div class="media">
+                        <a href="javascript:void(0)" class="ajax media-content" [style.background-image]="'url(' + (album.coverImageUrl || '../assets/img/c35.jpg') + ')'"></a>
+                        <div class="media-action media-action-overlay">
+                          <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play" style="display: flex; align-items: center; justify-content: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="list-content text-center">
+                        <div class="list-body">
+                          <a href="javascript:void(0)" class="list-title title ajax h-1x">{{ album.name }}</a>
+                          <a [routerLink]="['/artist-detail', artist?.id]" class="list-subtitle d-block text-muted h-1x subtitle ajax">{{ artist?.name }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                } @empty {
+                  <div class="col-12 p-3 text-muted">Albüm bulunamadı.</div>
+                }
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="tracks">
+              <div class="row list-row">
+                @for (song of songDto; track song.id) {
+                  <div class="col-12" [attr.data-id]="song.id" [attr.data-source]="song.audioUrl">
+                    <div class="list-item r">
+                      <div class="media">
+                        <a [routerLink]="['/item-detail', song.id]" class="ajax media-content" [style.background-image]="'url(' + (song.album?.coverImageUrl || '../assets/img/c34.jpg') + ')'"></a>
+                        <div class="media-action media-action-overlay">
+                          <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play" style="display: flex; align-items: center; justify-content: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="list-content text-center">
+                        <div class="list-body">
+                          <a [routerLink]="['/item-detail', song.id]" class="list-title title ajax h-1x">{{ song.title }}</a>
+                          <a [routerLink]="['/artist-detail', artist?.id]" class="list-subtitle d-block text-muted h-1x subtitle ajax">{{ artist?.name }}</a>
+                        </div>
+                      </div>
+                      <div class="list-action show-row">
+                        <div class="d-flex align-items-center">
+                          <div class="px-3 text-sm text-muted d-none d-md-block">03:24</div>
+                          <button class="btn btn-icon no-bg no-shadow" data-toggle-class>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="active-primary"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                          </button>
+                          <button class="btn btn-icon no-bg no-shadow btn-more" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-right"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                } @empty {
+                  <div class="col-12 p-3 text-muted">Şarkı bulunamadı.</div>
+                }
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="albums">
+              <div class="row list mb-4">
+                @for (album of albumDto; track album.id) {
+                  <div class="col-4 col-sm-3">
+                    <div class="list-item list-hover r mb-4">
+                      <div class="media">
+                        <a href="javascript:void(0)" class="ajax media-content" [style.background-image]="'url(' + (album.coverImageUrl || '../assets/img/c15.jpg') + ')'"></a>
+                        <div class="media-action media-action-overlay">
+                          <button class="btn btn-raised btn-icon btn-rounded bg--white btn-play" style="display: flex; align-items: center; justify-content: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="list-content text-center">
+                        <div class="list-body">
+                          <a href="javascript:void(0)" class="list-title title ajax h-1x">{{ album.name }}</a>
+                          <a [routerLink]="['/artist-detail', artist?.id]" class="list-subtitle d-block text-muted h-1x subtitle ajax">{{ artist?.name }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                } @empty {
+                  <div class="col-12 p-3 text-muted">Albüm bulunamadı.</div>
+                }
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div style="min-width: 4rem"></div>
+
+        <div class="w-xl w-auto-sm no-shrink">
+          <div class="sticky">
+
+            <div class="list mb-5">
+              <div class="list-item list-overlay r">
+                <div class="media">
+                  <a href="javascript:void(0)" class="ajax media-content" style="background-image:url(../assets/img/b17.jpg)"></a>
+                  <div class="media-action"></div>
+                </div>
+                <div class="list-content p-5 text-center">
+                  <div class="list-body">
+                    <a href="javascript:void(0)" class="list-title title ajax h3 font-weight-bold">
+                      Hip-Hop Chart 100
+                    </a>
+                    <a href="javascript:void(0)" class="list-subtitle d-block text-muted h-1x subtitle ajax">
+                      The hottest rap right now.
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <app-top-tracks></app-top-tracks>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

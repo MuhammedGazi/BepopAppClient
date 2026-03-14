@@ -15,6 +15,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { TopCharts } from './ui-components/charts/top-charts/top-charts';
 import { TopTracks } from './ui-components/charts/top-tracks/top-tracks';
 import { Genres } from './ui-components/genres/genres';
+import { ArtistsCircle } from './ui-components/artist/artists-circle/artists-circle';
+import { ArtistDetail } from './ui-components/artist-detail/artist-detail';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { Genres } from './ui-components/genres/genres';
     Events,
     TopCharts,
     TopTracks,
-    Genres
+    Genres,
+    ArtistsCircle,
+    ArtistDetail
   ],
   imports: [
     BrowserModule,

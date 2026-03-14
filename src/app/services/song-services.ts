@@ -16,4 +16,11 @@ export class SongServices extends GenericServices<SongModel> {
   getLast5Songs(): Observable<SongModel[]> {
     return this.http.get<SongModel[]>(`${this.apiUrl}last5songs`);
   }
+  getSongsByArtistId(artistId: number): Observable<SongModel[]> {
+    return this.http.get<SongModel[]>(`${this.apiUrl}songByArtist/${artistId}`);
+  }
+
+  getLast5SongsByArtist(artistId: number): Observable<SongModel[]> {
+    return this.http.get<SongModel[]>(`${this.apiUrl}last5SongByArtist/${artistId}`);
+  }
 }
