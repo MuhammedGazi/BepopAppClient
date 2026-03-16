@@ -6,15 +6,20 @@ import { Home } from './ui-components/discover/home/home';
 import { TopCharts } from './ui-components/charts/top-charts/top-charts';
 import { Genres } from './ui-components/genres/genres';
 import { ArtistDetail } from './ui-components/artist-detail/artist-detail';
+import { AlbumDetail } from './ui-components/album-detail/album-detail';
+import { Login } from './ui-components/login/login';
+import { AuthGuard } from './_guards/auth-guard';
 
 const routes: Routes = [
+  { path: 'login', component: Login },
   //UI Routes
   {path:'',component:UiLayout,children:[
-    {path:'',component:Home},
+    {path:'discover',component:Home},
     {path:'charts',component:TopCharts},
     {path:'genres',component:Genres},
-    {path:'artists',component:ArtistsCircle},
-    {path:'artist-detail/:id',component:ArtistDetail},
+    {path:'artists',component:ArtistsCircle,canActivate: [AuthGuard]},
+    {path:'artist-detail/:id',component:ArtistDetail,canActivate: [AuthGuard]},
+    {path:'album-detail/:id',component:AlbumDetail},
   ]}
 ];
 

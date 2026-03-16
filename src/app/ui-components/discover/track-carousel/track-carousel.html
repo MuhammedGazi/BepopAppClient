@@ -15,7 +15,7 @@
             <a
               [routerLink]="['/item-detail', song.id]"
               class="ajax media-content"
-              style="background-image: url('../assets/img/c20.jpg')"
+              [style.background-image]="'url(' + (song.coverImageUrl || '../assets/img/c1.jpg') + ')'"
             >
             </a>
 

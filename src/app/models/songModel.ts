@@ -7,6 +7,7 @@ export class SongModel{
   id:number;
   title: string;
   audioUrl: string;
+  coverImageUrl?: string | null;
   contentLevel: number;
   albumId?: number | null;
   album?: AlbumModel;

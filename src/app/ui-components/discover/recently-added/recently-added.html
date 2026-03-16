@@ -19,7 +19,7 @@
           <a
             [href]="'item.detail.html#' + song.id"
             class="ajax media-content"
-            [style.backgroundImage]="'url(' + (song.album?.coverImageUrl ? song.album.coverImageUrl : './assets/img/c' + (i % 8) + '.jpg') + ')'"
+            [style.backgroundImage]="'url(' + (song.coverImageUrl ? song.coverImageUrl : './assets/img/c' + (i % 8) + '.jpg') + ')'"
           >
           </a>
           <div class="media-action media-action-overlay">

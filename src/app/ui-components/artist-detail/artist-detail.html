@@ -108,7 +108,7 @@
                       </div>
                       <div class="list-content text-center">
                         <div class="list-body">
-                          <a href="javascript:void(0)" class="list-title title ajax h-1x">{{ album.name }}</a>
+                          <a [routerLink]="['/album-detail', album.id]" class="list-title title ajax h-1x">{{ album.name }}</a>
                           <a [routerLink]="['/artist-detail', artist?.id]" class="list-subtitle d-block text-muted h-1x subtitle ajax">{{ artist?.name }}</a>
                         </div>
                       </div>
@@ -174,7 +174,7 @@
                       </div>
                       <div class="list-content text-center">
                         <div class="list-body">
-                          <a href="javascript:void(0)" class="list-title title ajax h-1x">{{ album.name }}</a>
+                          <a [routerLink]="['/album-detail', album.id]" class="list-title title ajax h-1x">{{ album.name }}</a>
                           <a [routerLink]="['/artist-detail', artist?.id]" class="list-subtitle d-block text-muted h-1x subtitle ajax">{{ artist?.name }}</a>
                         </div>
                       </div>

@@ -8,7 +8,7 @@
       <div class="media">
 
         <a [routerLink]="['/item-detail', song.id]" class="ajax media-content"
-          [style.background-image]="'url(' + (song.album?.coverImageUrl || '../assets/img/c20.jpg') + ')'">
+          [style.background-image]="'url(' + (song.coverImageUrl || '../assets/img/c20.jpg') + ')'">
         </a>
 
         <div class="media-action">
