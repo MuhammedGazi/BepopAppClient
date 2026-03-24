@@ -1,0 +1,99 @@
+
+.bepop-custom-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    background-color: #12121c;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1040;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.player-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 30%;
+    min-width: 200px;
+}
+
+.player-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.player-artist {
+    font-size: 12px;
+    color: #888;
+}
+
+.player-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 40%;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+}
+
+.control-btn:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.control-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+    stroke: none;
+    transition: 0.2s;
+}
+
+.control-btn:hover svg {
+    fill: #7c52ff;
+}
+
+.player-right {
+    width: 30%;
+}
+.control-btn.active svg {
+    fill: #7c52ff !important;
+    filter: drop-shadow(0 0 5px rgba(124, 82, 255, 0.5));
+}
+
+
+.control-btn.active:hover svg {
+    fill: #9a7bff !important;
+}

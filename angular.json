@@ -56,6 +56,7 @@
               "src/styles.css",
               "public/libs/slick-carousel/slick/slick.css",
               "public/libs/slick-carousel/slick/slick-theme.css",
+              "public/libs/plyrist/src/plyrist.css",
               "public/assets/css/bootstrap.css",
               "public/assets/css/theme.css",
               "public/assets/css/style.css"

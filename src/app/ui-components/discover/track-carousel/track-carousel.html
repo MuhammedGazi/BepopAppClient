@@ -7,82 +7,56 @@
 </div>
 
 @if (songDto.length > 0) {
-  <div #slickSlider class="slick slick-visible slick-arrow-top row sr-item">
-    @for (song of songDto; track song.id) {
-      <div class="col-2" [attr.data-id]="song.id" [attr.data-source]="song.audioUrl">
-        <div class="list-item slick-item r list-hover mb-3">
-          <div class="media">
-            <a
-              [routerLink]="['/item-detail', song.id]"
-              class="ajax media-content"
-              [style.background-image]="'url(' + (song.coverImageUrl || '../assets/img/c1.jpg') + ')'"
-            >
-            </a>
+<div #slickSlider class="slick slick-visible slick-arrow-top row sr-item">
+  @for (song of songDto; track song.id) {
+  <div class="col-2" [attr.data-id]="song.id" [attr.data-source]="song.audioUrl">
+    <div class="list-item slick-item r list-hover mb-3">
+      <div class="media">
+        <a [routerLink]="['/item-detail', song.id]" class="ajax media-content"
+          [style.background-image]="'url(' + (song.coverImageUrl || '../assets/img/c1.jpg') + ')'">
+        </a>
 
-            <div class="media-action media-action-overlay">
-              <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
-                <i data-feather="heart" class="active-fill"></i>
-              </button>
-              <button
-                (click)="playSong(song)"
-                class="btn btn-raised btn-icon btn-rounded bg--white btn-play"
-                style="display: flex; align-items: center; justify-content: center"
-              >
-                @if (playingSongId !== song.id) {
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="black"
-                    stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                } @else {
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="black"
-                    stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="6" y="4" width="4" height="16"></rect>
-                    <rect x="14" y="4" width="4" height="16"></rect>
-                  </svg>
-                }
-              </button>
-              <button class="btn btn-icon no-bg no-shadow hide-row btn-more" data-toggle="dropdown">
-                <i data-feather="more-horizontal"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right"></div>
-            </div>
-          </div>
-
-          <div class="list-content text-center">
-            <div class="list-body">
-              <a [routerLink]="['/item-detail', song.id]" class="list-title title ajax h-1x">
-                {{ song.title }}
-              </a>
-              <a
-                [routerLink]="['/artist-detail', song.artistId]"
-                class="list-subtitle d-block text-muted h-1x subtitle ajax"
-              >
-                {{ song.artist?.name || 'Bilinmeyen Sanatçı' }}
-              </a>
-            </div>
-          </div>
+        <div class="media-action media-action-overlay">
+          <button class="btn btn-icon no-bg no-shadow hide-row" data-toggle-class>
+            <i data-feather="heart" class="active-fill"></i>
+          </button>
+          <button (click)="playSong(song)" class="btn btn-raised btn-icon btn-rounded bg--white btn-play"
+            style="display: flex; align-items: center; justify-content: center">
+            @if (playingSongId !== song.id) {
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black"
+              stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            } @else {
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black"
+              stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+            }
+          </button>
+          <button class="btn btn-icon no-bg no-shadow hide-row btn-more" data-toggle="dropdown">
+            <i data-feather="more-horizontal"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right"></div>
         </div>
       </div>
-    }
+
+      <div class="list-content text-center">
+        <div class="list-body">
+          <a [routerLink]="['/item-detail', song.id]" class="list-title title ajax h-1x">
+            {{ song.title }}
+          </a>
+          <a [routerLink]="['/artist-detail', song.artistId]"
+            class="list-subtitle d-block text-muted h-1x subtitle ajax">
+            {{ song.artist?.name || 'Bilinmeyen Sanatçı' }}
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+  }
+</div>
 } @else {
-  <div class="col-12 text-center text-muted py-4">Şarkılar yükleniyor...</div>
+<div class="col-12 text-center text-muted py-4">Şarkılar yükleniyor...</div>
 }

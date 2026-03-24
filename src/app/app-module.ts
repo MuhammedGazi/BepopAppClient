@@ -1,6 +1,5 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { UiLayout } from './layouts/ui-layout/ui-layout';
@@ -20,6 +19,8 @@ import { ArtistDetail } from './ui-components/artist-detail/artist-detail';
 import { AlbumDetail } from './ui-components/album-detail/album-detail';
 import { Login } from './ui-components/login/login';
 import { TokenInterceptor } from './_interceptors/token-interceptor';
+import { PlayButton } from './ui-components/shared/play-button/play-button';
+import { GlobalPlayer } from './ui-components/global-player/global-player';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { TokenInterceptor } from './_interceptors/token-interceptor';
     ArtistsCircle,
     ArtistDetail,
     AlbumDetail,
-    Login
+    Login,
+    PlayButton,
+    GlobalPlayer
   ],
   imports: [
     BrowserModule,

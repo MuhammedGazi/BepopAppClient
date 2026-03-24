@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnInit
 import { SongServices } from '../../../services/song-services';
 import { SongModel } from '../../../models/songModel';
 import { Subscription } from 'rxjs';
+import { PlayerStateService } from '../../../services/player-state.service';
 declare var $: any;
 @Component({
   selector: 'app-track-carousel',
@@ -11,8 +12,9 @@ declare var $: any;
 })
 export class TrackCarousel implements OnInit {
   private songService = inject(SongServices);
-  private cdr=inject(ChangeDetectorRef);
-  currentAudio: HTMLAudioElement | null = null;
+  private cdr = inject(ChangeDetectorRef);
+  private playerState = inject(PlayerStateService);
+
   playingSongId: number | null = null;
   songDto: SongModel[] = [];
   private subscription: Subscription = new Subscription();
@@ -20,16 +22,27 @@ export class TrackCarousel implements OnInit {
   @ViewChild('slickSlider', { static: false }) slickSlider!: ElementRef;
 
   ngOnInit(): void {
-    this.subscription = this.songService.getAll().subscribe({
-      next: (response) => {
-        this.songDto = response;
-        this.cdr.detectChanges();
+    this.subscription.add(
+      this.songService.getAll().subscribe({
+        next: (response) => {
+          this.songDto = response;
+          this.cdr.detectChanges();
+          setTimeout(() => {
+            this.initSlickSlider();
+          }, 100);
+        },
+        error: (err) => console.error("API Hatası:", err)
+      })
+    );
+
+    this.subscription.add(
+      this.playerState.currentSong$.subscribe(song => {
         setTimeout(() => {
-          this.initSlickSlider();
-        }, 100);
-      },
-      error: (err) => console.error("API Hatası:", err)
-    });
+          this.playingSongId = song ? song.id : null;
+          this.cdr.detectChanges();
+        });
+      })
+    );
   }
 
   private initSlickSlider(): void {
@@ -54,34 +67,30 @@ export class TrackCarousel implements OnInit {
   }
 
   playSong(song: SongModel): void {
-    if (!song.audioUrl) {
-      console.warn("Bu şarkının ses dosyası bulunamadı!");
-      return;
-    }
-
-    if (this.playingSongId === song.id && this.currentAudio) {
-      this.currentAudio.pause();
-      this.playingSongId = null;
+    if (this.playingSongId === song.id) {
+      this.playerState.pauseSong();
       console.log(song.title + " durduruldu.");
       return;
     }
+    console.log(song.title + " için yetki kontrolü yapılıyor...");
 
-    if (this.currentAudio) {
-      this.currentAudio.pause();
-    }
-    console.log(song.title + " çalınıyor... 🎵");
-    this.currentAudio = new Audio(song.audioUrl);
-    this.currentAudio.play().catch(error => {
-      console.error("Tarayıcı müziği oynatmaya izin vermedi:", error);
+    this.songService.playSong(song.id).subscribe({
+      next: (response) => {
+        if (response && response.title === 'Erişim Hatası') {
+          console.warn("Erişim Reddedildi:", response.description);
+          this.playerState.showError(response);
+        } else {
+          console.log(song.title + " çalınıyor... 🎵");
+          this.playerState.playNewSong(song);
+        }
+      },
+      error: (err) => {
+        console.error("API Hatası / Tarayıcı İzni:", err);
+      }
     });
-
-    this.playingSongId = song.id;
   }
+
   ngOnDestroy(): void {
-    if (this.currentAudio) {
-      this.currentAudio.pause();
-      this.currentAudio = null;
-    }
     this.subscription.unsubscribe();
   }
 }
