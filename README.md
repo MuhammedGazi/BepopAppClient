@@ -11,7 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![n8n](https://img.shields.io/badge/n8n-FF6D5A?style=for-the-badge&logo=n8n&logoColor=white)](https://n8n.io/)
 
-[Mimarisi](#-mimari-ve-teknoloji-yığını) • [Kurulum](#-kurulum-ve-kullanım) • [Özellikler](#-temel-özellikler) • [Album](#-ekran-görüntüleri-proje-albümü)
+[Mimarisi](#-mimari-ve-teknoloji-yığını) • [Kurulum](#-kurulum-ve-kullanım) • [Özellikler](#-temel-özellikler) • [Albüm](#-ekran-görüntüleri-proje-albümü)
 
 </div>
 
