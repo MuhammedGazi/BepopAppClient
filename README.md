@@ -17,7 +17,7 @@
 
 ## 📖 Proje Hakkında
 
-**Backend** => https://github.com/MuhammedGazi/BepopAppServer
+**Backend** => https://github.com/MuhammedGazi/BepopAppServer </br>
 **BepopApp Server**, kullanıcıların müzik dinleyebildiği, sanatçı ve albümleri keşfedebildiği bir platformun arka uç (backend) sistemidir. Salt bir CRUD uygulamasının ötesine geçerek, **Makine Öğrenmesi (Machine Learning)** destekli bir mikroservis ile kullanıcılara kişiselleştirilmiş müzik önerileri sunar. 
 
 Proje, endüstri standartlarında kurumsal bir yapı hedeflenerek **Katmanlı Mimari (N-Tier Architecture)** prensipleriyle inşa edilmiştir.
