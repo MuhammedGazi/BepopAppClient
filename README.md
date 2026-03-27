@@ -108,8 +108,8 @@ Proje, bileşenler arası bağımlılığı en aza indirmek (loose coupling) ama
 
 ```text
 📦 BepopAppServer
- ┣ 📂 BepopAppServer.Entity    # Core Modeller, Base Entity ve Interface'ler
+ ┣ 📂 BepopAppServer.Entity    # Core Modeller, Base Entity
  ┣ 📂 BepopAppServer.DAL       # Data Access (EF Core), Repository, UoW, Migrations
  ┣ 📂 BepopAppServer.Business  # İş Kuralları, DTO'lar, Validation Kuralları, Servisler
- ┗ 📂 BepopAppServer.API       # Controller'lar, Middlewares, AppSettings (Entry Point)
+ ┗ 📂 BepopAppServer.API       # Controller'lar, Middlewares, AppSettings
  ┣ 📂 [Python Microservice]    # ML Tabanlı Recommendation Servisi (FastAPI)
